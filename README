@@ -2,7 +2,18 @@ Mikado wraps Activerecord validation conditions with a block.
 
 Example:
 
-  # Model
+Instead of
+
+  class Item < ActiveRecord::Base
+    validates_presence_of :title, :if => :live?
+  
+    def live?
+      true
+    end  
+  end
+
+you can write like this
+
   class Item < ActiveRecord::Base
     include Mikado
     
@@ -15,6 +26,9 @@ Example:
     end
   end
   
+Currently mikado only supports the :if condition.
+You can help yourself, just negate the condition value.
+
 It supports all validations with name validates_*
 It also supports the methods validate, validate_on_create,
 validate_on_update and validate_each
