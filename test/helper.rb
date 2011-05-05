@@ -1,6 +1,9 @@
 require File.expand_path('../../lib/mikado', __FILE__)
-require 'sqlite3'
-require 'test/unit'
+require 'rubygems'
+require 'bundler/setup'
+
+Bundler.require :test
+
 require 'test/item'
 
 ActiveRecord::Base.establish_connection(

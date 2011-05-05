@@ -1,4 +1,5 @@
 require 'test/helper'
+require 'test/unit'
 
 class ItemTest < Test::Unit::TestCase
   def setup

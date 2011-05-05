@@ -1,1 +1,20 @@
-This is mikado validation helper
+Mikado wraps Activerecord validation conditions with a block.
+
+Example:
+
+  # Model
+  class Item < ActiveRecord::Base
+    include Mikado
+    
+    mikado :live? do
+      validates_presence_of :title
+    end
+    
+    def live?
+      true
+    end
+  end
+  
+It supports all validations with name validates_*
+It also supports the methods validate, validate_on_create,
+validate_on_update and validate_each
