@@ -1,5 +1,5 @@
-require 'test/helper'
 require 'test/unit'
+require File.expand_path("../helper", __FILE__)
 
 class ItemTest < Test::Unit::TestCase
   def setup
@@ -8,7 +8,7 @@ class ItemTest < Test::Unit::TestCase
 
   def reload(klass)
     Object.send(:remove_const, klass.to_s)
-    load "test/#{klass.to_s.downcase}.rb"
+    load File.expand_path("../#{klass.to_s.downcase}.rb", __FILE__)
     yield
   end
 

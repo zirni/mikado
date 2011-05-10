@@ -10,7 +10,7 @@ task :default do
   end
   
   Dir['test/*_test.rb'].each do |file|
-    require file
+    require File.expand_path("../#{file}", __FILE__)
   end
 end
 
@@ -19,7 +19,7 @@ namespace :db do
     desc "create and prepare test database"
     task :prepare do
       Dir.mkdir('test/db') unless File.directory?('test/db')
-      require 'test/prepare'
+      require File.expand_path("../test/prepare", __FILE__)
     end
     
     desc "delete test database"

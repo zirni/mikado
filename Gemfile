@@ -4,6 +4,6 @@ source "http://rubygems.org"
 gemspec
 
 group :test do
-  gem 'activerecord', '2.3.5', :require => 'active_record'
+  gem 'activerecord', '3.0.3', :require => 'active_record'
   gem 'sqlite3'
 end

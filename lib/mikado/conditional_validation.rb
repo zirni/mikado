@@ -36,26 +36,17 @@ module Mikado
     end
     
     def modify_validations
-      methods.map { |m| m if m.starts_with?("validates_") }.compact.each do |method|
-        (class << self; self; end).instance_eval do
-
-          define_method "#{method}_with_mikado" do |*attr_names|
-            attrs = modify_with_mikado(attr_names)
-            return self.send("#{method}_without_mikado", *attrs)
-          end
-          
-          alias_method_chain method, "mikado"
-        end
-      end
+      meths = methods.map { |m| m if m.to_s.starts_with?("validates_") }.compact
+      meths |= %w( validate validate_on_create validate_on_update )
       
-      %w( validate validate_on_create validate_on_update ).each do |method|
+      meths.each do |method|
         (class << self; self; end).instance_eval do
 
           define_method "#{method}_with_mikado" do |*attr_names, &block|
             attrs = modify_with_mikado(attr_names)
             return self.send("#{method}_without_mikado", *attrs, &block)
           end
-
+          
           alias_method_chain method, "mikado"
         end
       end
@@ -65,16 +56,17 @@ module Mikado
       return attr_names unless mikado_validation
       
       options = attr_names.extract_options!
+      options = options.dup if Mikado::Utility.is_ar_3?
+
       options[:if] = [] if options.blank?
       options[:if] = [options[:if]] if !options[:if].is_a?(Array)
-    
+
       options[:if] = options[:if] | mikado_validation
     
       attr_names << options
       
       attr_names
     end
-
     
   end
 end

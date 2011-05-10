@@ -4,7 +4,7 @@ require 'bundler/setup'
 
 Bundler.require :test
 
-require 'test/item'
+require File.expand_path("../item", __FILE__)
 
 ActiveRecord::Base.establish_connection(
   :adapter  => "sqlite3",
