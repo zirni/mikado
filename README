@@ -1,5 +1,7 @@
 Mikado wraps Activerecord validation conditions with a block.
 
+Mikado has been tested with ruby 1.8/1.9 and ActiveRecord >= 2.3.5
+
 Example:
 
 Instead of
